@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Pack.mapper.ExportMapper">
+    <select id="selectAll"  resultType="LogiExportVo">
+        SELECT *
+        from Export
+    </select>
+    
+    <select id="selectByInstNo" parameterType="String" resultType="LogiExportVo">
+        SELECT * 
+        from Export
+        where instruction_no=#{instructionNo};
+    </select>
+    
+    <select id="selectSome" parameterType="LogiExportSearchDTO" resultType="LogiExportVo">
+    	select *
+    	from Export
+    	where
+    	<if test='status != null and status neq ""'>status=#{status} and</if>
+    	<if test='location != null and location neq ""'>location=#{location} and</if>
+    	<!-- <if test="product_family != ''">product_family=#{product_family} and</if> -->
+    	<if test='target != null and target neq ""'>target= like CONCAT('%',#{target},'%') and</if>
+    	<if test='lot_no != null and lot_no neq ""'>lot_no like CONCAT('%',#{lot_no},'%') and</if>
+    	<if test='item_no != null and item_no neq ""'>item_no like CONCAT('%',#{item_no},'%') and</if>
+    	<if test='item_name != null and item_name neq ""'>item_name=#{item_name} and</if>
+    	<!-- <if test="from_warehouse != ''">from_warehouse=#{from_warehouse} and</if> -->
+		<!-- <if test="unit != ''">unit=#{unit} and</if> -->
+    	<if test='order_date != null and order_date neq ""'>order_date=#{order_date} and</if>
+    	<if test='inst_reg_date != null and inst_reg_date neq ""'>inst_reg_date=#{inst_reg_date} and</if>
+    	<if test='inst_deatline != null and inst_deatline neq ""'>inst_deatline=#{inst_deatline} and</if>
+    	<if test='done_date != null and done_date neq ""'>done_date=#{done_date} and</if>
+    	(width between #{min_width} and #{max_width}) and
+    	(weight between #{min_weight} and #{max_weight}) and
+    	(thickness between #{min_thickness} and #{max_thickness}) and
+    	(height between #{min_height} and #{max_height}) and
+    	(order_amount between #{min_order_amount} and #{max_order_amount}) and
+    	(ex_amount between #{min_ex_amount} and #{max_ex_amount})
+    </select>
+    
+    <insert id="insert" parameterType="LogiExportDTO">
+        INSERT
+        INTO Export 
+        VALUES (
+        	#{status},
+        	#{location},
+        	#{instruction_no},
+        	#{target},
+        	#{lot_no},
+        	#{item_no},
+        	#{item_name},
+        	#{width},
+        	#{weight},
+        	#{thickness},
+        	#{height},
+        	#{order_amount},
+        	#{ex_amount},
+        	#{ex_remain},
+        	<!-- #{to_warehouse}, -->
+        	#{order_date},
+        	#{inst_reg_date},
+        	#{inst_deadline},
+        	#{done_date}
+        );
+    </insert>
+    
+    <delete id="delete" parameterType="String">
+	    delete
+		from Export
+		where instruction_no=#{instructionNo};
+    </delete>
+    
+    <update id="confirm" parameterType="String">
+    	UPDATE Export 
+    	SET status = "출고완료" 
+    	WHERE instruction_no=#{instructionNo};
+    </update>
+</mapper>

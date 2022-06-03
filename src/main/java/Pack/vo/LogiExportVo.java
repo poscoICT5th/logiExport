@@ -8,15 +8,22 @@ import lombok.ToString;
 @Getter
 @Setter
 public class LogiExportVo {
+	String status;
 	String location;
-	String warehouse_code;
-	String purpose;
-	String warehouse_code_desc;
-	String use;
-	int maximum_weight;
-	int maxinum_count;
-	String inventory_using;
-	String remarks;
-	
-	
+	String instruction_no;
+	String target;
+	String lot_no;
+	String item_no;
+	String item_name;
+	float width;
+	float weight;
+	float thickness;
+	float height;
+	int order_amount;
+	int ex_amount;
+	int ex_remain;
+	String order_date;
+	String inst_reg_date;
+	String inst_deadline;
+	String done_date;
 }
