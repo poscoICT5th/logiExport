@@ -5,9 +5,4 @@
     <select id="selectTest"  resultType="TestVo">
         SELECT 'Test123331' AS NAME
     </select>
-    
-    <select id="selectAll"  resultType="LogiExportVo">
-        SELECT * from Export
-    </select>
-    
 </mapper>
