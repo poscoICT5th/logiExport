@@ -11,7 +11,7 @@ public class LogiExportVo {
 	String status;
 	String location;
 	String instruction_no;
-	String target;
+	String customer;
 	String lot_no;
 	String item_no;
 	String item_name;

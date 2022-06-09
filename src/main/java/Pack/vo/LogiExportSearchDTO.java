@@ -34,7 +34,7 @@ public class LogiExportSearchDTO {
 	int max_ex_amount;
 	double min_width;
 	double max_width;
-	String target;
+	String customer;
 	String order_date;
 	String inst_reg_date;
 	String inst_deatline;

@@ -14,6 +14,8 @@ import Pack.vo.LogiExportVo;
 public interface ExportMapper {
     List<LogiExportVo> selectAll();
 
+    LogiExportVo selectByInstNo(String instructionNo);
+
     List<LogiExportVo> selectSome(LogiExportSearchDTO logiExportSearchDTO);
 
     int insert(LogiExportDTO data);
@@ -21,4 +23,7 @@ public interface ExportMapper {
 	int delete(String instructionNo);
 	
 	int confirm(String instructionNo);
+
+	int deletes(List<String> logiExportDeleteList);
+
 }

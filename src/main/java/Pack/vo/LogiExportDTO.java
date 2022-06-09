@@ -13,7 +13,7 @@ public class LogiExportDTO {
 	String status;
 	String location;
 	String instruction_no;
-	String target;
+	String customer;
 	String lot_no;
 	String item_no;
 	String item_name;
@@ -28,12 +28,12 @@ public class LogiExportDTO {
 	String inst_reg_date;
 	String inst_deadline;
 	String done_date;
-	public LogiExportDTO(String location, String target, String lot_no, String item_no, String item_name, float width, float weight,
+	public LogiExportDTO(String location, String customer, String lot_no, String item_no, String item_name, float width, float weight,
 			float thickness, float height, int order_amount, int ex_amount, int ex_remain, String order_date,
 			String inst_deadline, String done_date) {
 		super();
 		this.location = location;
-		this.target = target;
+		this.customer = customer;
 		this.lot_no = lot_no;
 		this.item_no = item_no;
 		this.item_name = item_name;

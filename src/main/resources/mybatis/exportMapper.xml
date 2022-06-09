@@ -17,19 +17,19 @@
     	select *
     	from Export
     	where
-    	<if test='status != null and status neq ""'>status=#{status} and</if>
-    	<if test='location != null and location neq ""'>location=#{location} and</if>
+    	<if test='status != null and status neq "전체보기"'>status=#{status} and</if>
+    	<if test='location != null and location neq "전체보기"'>location=#{location} and</if>
     	<!-- <if test="product_family != ''">product_family=#{product_family} and</if> -->
-    	<if test='target != null and target neq ""'>target= like CONCAT('%',#{target},'%') and</if>
-    	<if test='lot_no != null and lot_no neq ""'>lot_no like CONCAT('%',#{lot_no},'%') and</if>
-    	<if test='item_no != null and item_no neq ""'>item_no like CONCAT('%',#{item_no},'%') and</if>
-    	<if test='item_name != null and item_name neq ""'>item_name=#{item_name} and</if>
+    	<if test='customer != null and customer neq "전체보기"'>customer= like CONCAT('%',#{customer},'%') and</if>
+    	<if test='lot_no != null and lot_no neq "전체보기"'>lot_no like CONCAT('%',#{lot_no},'%') and</if>
+    	<if test='item_no != null and item_no neq "전체보기"'>item_no like CONCAT('%',#{item_no},'%') and</if>
+    	<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     	<!-- <if test="from_warehouse != ''">from_warehouse=#{from_warehouse} and</if> -->
 		<!-- <if test="unit != ''">unit=#{unit} and</if> -->
-    	<if test='order_date != null and order_date neq ""'>order_date=#{order_date} and</if>
-    	<if test='inst_reg_date != null and inst_reg_date neq ""'>inst_reg_date=#{inst_reg_date} and</if>
-    	<if test='inst_deatline != null and inst_deatline neq ""'>inst_deatline=#{inst_deatline} and</if>
-    	<if test='done_date != null and done_date neq ""'>done_date=#{done_date} and</if>
+    	<if test='order_date != null and order_date neq "전체보기"'>order_date=#{order_date} and</if>
+    	<if test='inst_reg_date != null and inst_reg_date neq "전체보기"'>inst_reg_date=#{inst_reg_date} and</if>
+    	<if test='inst_deatline != null and inst_deatline neq "전체보기"'>inst_deatline=#{inst_deatline} and</if>
+    	<if test='done_date != null and done_date neq "전체보기"'>done_date=#{done_date} and</if>
     	(width between #{min_width} and #{max_width}) and
     	(weight between #{min_weight} and #{max_weight}) and
     	(thickness between #{min_thickness} and #{max_thickness}) and
@@ -45,7 +45,7 @@
         	#{status},
         	#{location},
         	#{instruction_no},
-        	#{target},
+        	#{customer},
         	#{lot_no},
         	#{item_no},
         	#{item_name},
@@ -69,10 +69,18 @@
 		from Export
 		where instruction_no=#{instructionNo};
     </delete>
+        
+    <delete id="deletes" parameterType="List">
+    	<foreach collection="logiExportDeleteList" item="instructionNo" index="index">
+		    delete
+			from Export
+			where instruction_no=#{instructionNo};
+		</foreach>
+    </delete>
     
     <update id="confirm" parameterType="String">
     	UPDATE Export 
-    	SET status = "출고완료" 
+    	SET status = "출고완료", done_date=now()
     	WHERE instruction_no=#{instructionNo};
     </update>
 </mapper>
