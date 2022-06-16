@@ -19,13 +19,14 @@
     	where
     	<if test='status != null and status neq "전체보기"'>status=#{status} and</if>
     	<if test='location != null and location neq "전체보기"'>location=#{location} and</if>
-    	<!-- <if test="product_family != ''">product_family=#{product_family} and</if> -->
+    	<if test='product_family != null and product_family neq "전체보기"'>product_family=#{product_family} and</if>
+    	<if test='from_warehouse != null and from_warehouse neq "전체보기"'>from_warehouse=#{from_warehouse} and</if>
     	<if test='customer != null and customer neq "전체보기"'>customer= like CONCAT('%',#{customer},'%') and</if>
     	<if test='lot_no != null and lot_no neq "전체보기"'>lot_no like CONCAT('%',#{lot_no},'%') and</if>
-    	<if test='item_no != null and item_no neq "전체보기"'>item_no like CONCAT('%',#{item_no},'%') and</if>
+    	<if test='item_code != null and item_code neq "전체보기"'>item_code like CONCAT('%',#{item_code},'%') and</if>
     	<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     	<!-- <if test="from_warehouse != ''">from_warehouse=#{from_warehouse} and</if> -->
-		<!-- <if test="unit != ''">unit=#{unit} and</if> -->
+		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
     	<if test='order_date != null and order_date neq "전체보기"'>order_date=#{order_date} and</if>
     	<if test='inst_reg_date != null and inst_reg_date neq "전체보기"'>inst_reg_date=#{inst_reg_date} and</if>
     	<if test='inst_deatline != null and inst_deatline neq "전체보기"'>inst_deatline=#{inst_deatline} and</if>
@@ -42,21 +43,23 @@
         INSERT
         INTO Export 
         VALUES (
-        	#{status},
-        	#{location},
         	#{instruction_no},
-        	#{customer},
+        	#{status},
         	#{lot_no},
-        	#{item_no},
+        	#{item_code},
         	#{item_name},
-        	#{width},
-        	#{weight},
-        	#{thickness},
-        	#{height},
         	#{order_amount},
         	#{ex_amount},
         	#{ex_remain},
-        	<!-- #{to_warehouse}, -->
+        	#{unit},
+        	#{weight},
+        	#{width},
+        	#{thickness},
+        	#{height},
+        	#{product_family},
+        	#{location},
+        	#{from_warehouse},        	
+        	#{customer},
         	#{order_date},
         	#{inst_reg_date},
         	#{inst_deadline},

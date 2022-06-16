@@ -18,7 +18,7 @@ public class LogiExportSearchDTO {
 	String location;
 	String product_family;
 	String lot_no;
-	String item_no;
+	String item_code;
 	String item_name;
 	String from_warehouse;
 	String unit;
