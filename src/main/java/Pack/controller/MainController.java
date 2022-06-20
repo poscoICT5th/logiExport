@@ -97,4 +97,11 @@ public class MainController {
 			return false;
 		}
 	}
+	
+	@GetMapping("/inst/{lotNo}")
+	public LogiExportVo selectByLotNo(@PathVariable String lotNo) {
+		System.out.println(lotNo);
+		LogiExportVo result = exportService.selectByLotNo(lotNo);
+		return result;
+	}
 }

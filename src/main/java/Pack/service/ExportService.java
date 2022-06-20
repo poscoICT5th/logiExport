@@ -45,4 +45,8 @@ public class ExportService {
 	public int deletes(LogiExportDeleteList logiExportDeleteList) {
 		return exportMapper.deletes(logiExportDeleteList.getLogiExportDeleteList());
 	}
+
+	public LogiExportVo selectByLotNo(String lotNo) {
+		return exportMapper.selectByLotNo(lotNo);
+	}
 }

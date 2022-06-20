@@ -26,4 +26,6 @@ public interface ExportMapper {
 
 	int deletes(List<String> logiExportDeleteList);
 
+	LogiExportVo selectByLotNo(String lotNo);
+
 }
