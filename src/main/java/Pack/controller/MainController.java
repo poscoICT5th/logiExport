@@ -98,7 +98,7 @@ public class MainController {
 		}
 	}
 	
-	@GetMapping("/inst/{lotNo}")
+	@GetMapping("/lotno/{lotNo}")
 	public LogiExportVo selectByLotNo(@PathVariable String lotNo) {
 		System.out.println(lotNo);
 		LogiExportVo result = exportService.selectByLotNo(lotNo);
