@@ -86,4 +86,10 @@
     	SET status = "출고완료", done_date=now()
     	WHERE instruction_no=#{instructionNo};
     </update>
+    
+        <select id="selectByLotNo" parameterType="String" resultType="LogiExportVo">
+        SELECT * 
+        from Export
+        where lot_no=#{lot_no};
+    </select>
 </mapper>
