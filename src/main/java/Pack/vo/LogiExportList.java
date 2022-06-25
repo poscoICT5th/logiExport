@@ -7,6 +7,6 @@ import lombok.*;
 @ToString 
 @Getter
 @Setter
-public class LogiExportDeleteList {
-	List<String> logiExportDeleteList;
+public class LogiExportList {
+	List<String> logiExportList;
 }
