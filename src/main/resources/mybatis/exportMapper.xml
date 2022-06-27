@@ -74,12 +74,28 @@
     </delete>
         
     <delete id="deletes" parameterType="List">
-    	<foreach collection="logiExportDeleteList" item="instructionNo" index="index">
+    	<foreach collection="logiExportList" item="instructionNo" index="index">
 		    delete
 			from Export
 			where instruction_no=#{instructionNo};
 		</foreach>
     </delete>
+    
+    <update id="cancels" parameterType="List">
+    	<foreach collection="logiExportList" item="instructionNo" index="index">
+		    update Export
+		    SET status = "출고취소"
+			where instruction_no=#{instructionNo};
+		</foreach>
+    </update>
+    
+    <update id="rollback" parameterType="List">
+    	<foreach collection="logiExportList" item="instructionNo" index="index">
+		    update Export
+		    SET status = "출고예정"
+			where instruction_no=#{instructionNo};
+		</foreach>
+    </update>
     
     <update id="confirm" parameterType="String">
     	UPDATE Export 

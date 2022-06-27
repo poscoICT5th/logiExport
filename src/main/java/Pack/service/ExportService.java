@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Pack.vo.LogiExportDTO;
-import Pack.vo.LogiExportDeleteList;
+import Pack.vo.LogiExportList;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
 import Pack.vo.TestVo;
@@ -42,11 +42,19 @@ public class ExportService {
 		return exportMapper.delete(instructionNo);
 	}
 
-	public int deletes(LogiExportDeleteList logiExportDeleteList) {
-		return exportMapper.deletes(logiExportDeleteList.getLogiExportDeleteList());
+	public int deletes(LogiExportList logiExportList) {
+		return exportMapper.deletes(logiExportList.getLogiExportList());
 	}
 
 	public LogiExportVo selectByLotNo(String lotNo) {
 		return exportMapper.selectByLotNo(lotNo);
+	}
+
+	public int cancels(LogiExportList logiExportList) {
+		return exportMapper.cancels(logiExportList);
+	}
+
+	public int rollback(LogiExportList logiExportList) {
+		return exportMapper.rollback(logiExportList);
 	}
 }
