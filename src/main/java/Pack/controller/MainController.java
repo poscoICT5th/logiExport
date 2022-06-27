@@ -18,7 +18,7 @@ import Pack.service.ExportService;
 import Pack.service.TestService;
 import Pack.vo.TestVo;
 import Pack.vo.LogiExportDTO;
-import Pack.vo.LogiExportDeleteList;
+import Pack.vo.LogiExportList;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
 
@@ -68,10 +68,18 @@ public class MainController {
 	}
 	
 	@DeleteMapping("/export")
-	public boolean exportDeletes(@RequestBody LogiExportDeleteList logiExportDeleteList) {
+	public boolean exportDeletes(@RequestBody LogiExportList logiExportList) {
 		System.out.println("delete List");
-		System.out.println(logiExportDeleteList);
-		int result = exportService.deletes(logiExportDeleteList);
+		System.out.println(logiExportList);
+		int result = exportService.cancels(logiExportList);
+		return result==1?true:false;
+	}
+	
+	@PutMapping("/export/rollback")
+	public boolean exportRollbacks(@RequestBody LogiExportList logiExportList) {
+		System.out.println("rollback List");
+		System.out.println(logiExportList);
+		int result = exportService.rollback(logiExportList);
 		return result==1?true:false;
 	}
 	

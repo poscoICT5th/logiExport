@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import Pack.vo.LogiExportDTO;
+import Pack.vo.LogiExportList;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
 
@@ -27,5 +28,9 @@ public interface ExportMapper {
 	int deletes(List<String> logiExportDeleteList);
 
 	LogiExportVo selectByLotNo(String lotNo);
+
+	int cancels(LogiExportList logiExportList);
+
+	int rollback(LogiExportList logiExportList);
 
 }
