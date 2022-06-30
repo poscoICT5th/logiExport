@@ -64,14 +64,24 @@ public class MainController {
 		System.out.println("post 들어감");
 		System.out.println(data); 
 		int result = exportService.insert(data);
+		if (result > 0) {
+			rabbitTemplate.convertAndSend("posco", "export.Inventory.process", data);
+		}
 		return result==1?true:false;
 	}
 	
 	@DeleteMapping("/export")
 	public boolean exportDeletes(@RequestBody LogiExportList logiExportList) {
 		System.out.println("delete List");
+
 		System.out.println(logiExportList);
 		int result = exportService.cancels(logiExportList);
+		if (result > 0) {
+			for (String instructionNo : logiExportList.getLogiExportList()) {
+				LogiExportVo deleteExportDTO = exportService.selectByInstNo(instructionNo);
+				rabbitTemplate.convertAndSend("posco", "export.Inventory.done", deleteExportDTO);
+			}
+		}
 		return result==1?true:false;
 	}
 	
@@ -87,7 +97,11 @@ public class MainController {
 	public boolean exportDelete(@PathVariable String instructionNo) {
 		System.out.println("출고 삭제");
 		System.out.println(instructionNo);
+		LogiExportVo exportDeleteData = exportService.selectByInstNo(instructionNo);
 		int result = exportService.delete(instructionNo);
+		if (result > 0 ) {
+			rabbitTemplate.convertAndSend("posco", "export.Inventory.done", exportDeleteData);
+		}
 		return result==1?true:false;
 	}
 	
@@ -100,6 +114,7 @@ public class MainController {
 			LogiExportVo exportConfirmData = exportService.selectByInstNo(instructionNo);
 			System.out.println(exportConfirmData);
 			rabbitTemplate.convertAndSend("posco", "export.Inventory.reduce", exportConfirmData);
+			rabbitTemplate.convertAndSend("posco", "export.Inventory.done", exportConfirmData);
 			return true;			
 		} else {
 			return false;
