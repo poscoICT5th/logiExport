@@ -92,7 +92,7 @@
     <update id="rollback" parameterType="List">
     	<foreach collection="logiExportList" item="instructionNo" index="index">
 		    update Export
-		    SET status = "출고예정"
+		    SET status = "출고대기"
 			where instruction_no=#{instructionNo};
 		</foreach>
     </update>

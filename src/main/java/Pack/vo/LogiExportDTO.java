@@ -3,12 +3,14 @@ package Pack.vo;
 import java.text.SimpleDateFormat;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString 
 @Getter
 @Setter
+@NoArgsConstructor
 public class LogiExportDTO {
 	String instruction_no;
 	String status;
@@ -38,7 +40,7 @@ public class LogiExportDTO {
 		super();
 		System.out.println("출고 여기들어옴");
 		long curTime = System.currentTimeMillis();
-		String makeDate = new SimpleDateFormat("YYMMddHHmmssms").format(curTime);
+		String makeDate = new SimpleDateFormat("YYMMddHHmmssSSS").format(curTime);
 		this.instruction_no = makeDate;
 		this.status = "출고대기";
 		this.lot_no = lot_no;
