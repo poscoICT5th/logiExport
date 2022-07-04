@@ -37,6 +37,6 @@ public class LogiExportSearchDTO {
 	String customer;
 	String order_date;
 	String inst_reg_date;
-	String inst_deatline;
+	String inst_deadline;
 	String done_date;
 }
