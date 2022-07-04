@@ -34,7 +34,7 @@ public class MainController {
 	RabbitTemplate rabbitTemplate;
 	
 	@GetMapping("/test")
-	public List test() {
+	public List<TestVo> test() {
 		System.out.println(111);
 	    List<TestVo> testList = testService.selectTest();
 	    System.out.println(testList);
@@ -42,7 +42,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/export")
-	public List exportAll() {
+	public List<LogiExportVo> exportAll() {
 		System.out.println("export all");
 	    List<LogiExportVo> exportAll = exportService.selectAll();
 	    System.out.println(exportAll);
@@ -50,7 +50,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/search")
-	public List exportSearch(LogiExportSearchDTO logiExportSearchDTO) {
+	public List<LogiExportVo> exportSearch(LogiExportSearchDTO logiExportSearchDTO) {
 		System.out.println("export search");
 		System.out.println(logiExportSearchDTO);
 	    List<LogiExportVo> exportSearch = exportService.selectSome(logiExportSearchDTO);
