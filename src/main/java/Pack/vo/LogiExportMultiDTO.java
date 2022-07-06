@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 //@NoArgsConstructor
-public class LogiExportDTO {
+public class LogiExportMultiDTO {
 	String instruction_no;
 	String status;
 	String lot_no;
@@ -34,12 +34,12 @@ public class LogiExportDTO {
 	String inst_reg_date;
 	String inst_deadline;
 	String done_date;
-	public LogiExportDTO(String lot_no, String item_code, String item_name, int order_amount,
-			int ex_amount, String unit, float weight, float width, float thickness, float height,
-			String product_family, String location, String from_warehouse, String customer, String order_date,
+	public LogiExportMultiDTO(String lot_no, String item_code, String item_name, int amount,
+			String unit, float weight, float width, float thickness, float height,
+			String product_family, String location, String warehouse_code, String customer, String order_date,
 			String inst_deadline) {
 		super();
-		System.out.println("출고 여기들어옴");
+		System.out.println("출고 멀티 여기들어옴");
 		long curTime = System.currentTimeMillis();
 		String makeDate = new SimpleDateFormat("YYMMddHHmmssSSS").format(curTime) + AutoIncrese.getNum();
 		this.instruction_no = makeDate;
@@ -47,8 +47,8 @@ public class LogiExportDTO {
 		this.lot_no = lot_no;
 		this.item_code = item_code;
 		this.item_name = item_name;
-		this.order_amount = order_amount;
-		this.ex_amount = ex_amount;
+		this.order_amount = amount;
+		this.ex_amount = amount;
 		this.unit = unit;
 		this.weight = weight;
 		this.width = width;
@@ -56,7 +56,7 @@ public class LogiExportDTO {
 		this.height = height;
 		this.product_family = product_family;
 		this.location = location;
-		this.from_warehouse = from_warehouse;
+		this.from_warehouse = warehouse_code;
 		this.customer = customer;
 		this.order_date = order_date;
 		this.inst_reg_date = new SimpleDateFormat("YYYY-MM-dd").format(curTime);
