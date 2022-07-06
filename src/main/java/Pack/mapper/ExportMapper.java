@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import Pack.vo.LogiExportDTO;
 import Pack.vo.LogiExportList;
+import Pack.vo.LogiExportMultiDTO;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
 
@@ -32,5 +33,7 @@ public interface ExportMapper {
 	int cancels(LogiExportList logiExportList);
 
 	int rollback(LogiExportList logiExportList);
+
+	int inserts(List<LogiExportMultiDTO> data);
 
 }
