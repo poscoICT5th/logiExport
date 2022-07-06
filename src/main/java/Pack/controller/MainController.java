@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Pack.service.AutoIncrese;
 import Pack.service.ExportService;
 import Pack.service.TestService;
 import Pack.vo.TestVo;
 import Pack.vo.LogiExportDTO;
 import Pack.vo.LogiExportList;
+import Pack.vo.LogiExportMultiDTO;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
 
@@ -70,15 +72,32 @@ public class MainController {
 		return result==1?true:false;
 	}
 	
+	@PostMapping("/export/multi")
+	public boolean exportAdds(@RequestBody List<LogiExportMultiDTO> data) {
+		System.out.println("post 들어감");
+		System.out.println(data); 
+		int result = exportService.inserts(data);
+		AutoIncrese.setNum();
+		if (result > 0) {
+			for (LogiExportMultiDTO logiExportMultiDTO : data) {
+				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", logiExportMultiDTO);				
+			}
+		}
+		return result==1?true:false;
+	}
+	
 	@DeleteMapping("/export")
 	public boolean exportDeletes(@RequestBody LogiExportList logiExportList) {
 		System.out.println("delete List");
 
 		System.out.println(logiExportList);
 		int result = exportService.cancels(logiExportList);
+		System.out.println(result);
 		if (result > 0) {
 			for (String instructionNo : logiExportList.getLogiExportList()) {
+				System.out.println(instructionNo);
 				LogiExportVo deleteExportDTO = exportService.selectByInstNo(instructionNo);
+				System.out.println(deleteExportDTO);
 				rabbitTemplate.convertAndSend("posco", "export.Inventory.done", deleteExportDTO);
 			}
 		}
@@ -90,6 +109,15 @@ public class MainController {
 		System.out.println("rollback List");
 		System.out.println(logiExportList);
 		int result = exportService.rollback(logiExportList);
+		System.out.println(result);
+		if (result > 0) {
+			for (String instructionNo : logiExportList.getLogiExportList()) {
+				System.out.println(instructionNo);
+				LogiExportVo rollbackExportDTO = exportService.selectByInstNo(instructionNo);
+				System.out.println(rollbackExportDTO);
+				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", rollbackExportDTO);
+			}
+		}
 		return result==1?true:false;
 	}
 	

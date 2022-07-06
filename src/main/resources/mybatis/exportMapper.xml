@@ -67,6 +67,36 @@
         );
     </insert>
     
+    <insert id="inserts" parameterType="List">
+    	<foreach collection="data" item="item" index="index">
+        INSERT
+        INTO Export 
+        VALUES (
+        	#{item.instruction_no},
+        	#{item.status},
+        	#{item.lot_no},
+        	#{item.item_code},
+        	#{item.item_name},
+        	#{item.order_amount},
+        	#{item.ex_amount},
+        	#{item.ex_remain},
+        	#{item.unit},
+        	#{item.weight},
+        	#{item.width},
+        	#{item.thickness},
+        	#{item.height},
+        	#{item.product_family},
+        	#{item.location},
+        	#{item.from_warehouse},        	
+        	#{item.customer},
+        	#{item.order_date},
+        	#{item.inst_reg_date},
+        	#{item.inst_deadline},
+        	#{item.done_date}
+        );
+        </foreach>
+    </insert>
+    
     <delete id="delete" parameterType="String">
 	    delete
 		from Export
