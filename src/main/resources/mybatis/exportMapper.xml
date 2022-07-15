@@ -5,6 +5,7 @@
     <select id="selectAll"  resultType="LogiExportVo">
         SELECT *
         from Export
+        order by inst_reg_date desc;
     </select>
     
     <select id="selectByInstNo" parameterType="String" resultType="LogiExportVo">
@@ -37,6 +38,7 @@
     	(height between #{min_height} and #{max_height}) and
     	(order_amount between #{min_order_amount} and #{max_order_amount}) and
     	(ex_amount between #{min_ex_amount} and #{max_ex_amount})
+        order by inst_reg_date desc;
     </select>
     
     <insert id="insert" parameterType="LogiExportDTO">
@@ -133,7 +135,7 @@
     	WHERE instruction_no=#{instructionNo};
     </update>
     
-        <select id="selectByLotNo" parameterType="String" resultType="LogiExportVo">
+    <select id="selectByLotNo" parameterType="String" resultType="LogiExportVo">
         SELECT * 
         from Export
         where lot_no=#{lot_no};
