@@ -20,6 +20,7 @@ import Pack.service.TestService;
 import Pack.vo.TestVo;
 import Pack.vo.LogiExportDTO;
 import Pack.vo.LogiExportList;
+import Pack.vo.LogiExportMulti;
 import Pack.vo.LogiExportMultiDTO;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
@@ -73,13 +74,13 @@ public class MainController {
 	}
 	
 	@PostMapping("/export/multi")
-	public boolean exportAdds(@RequestBody List<LogiExportMultiDTO> data) {
+	public boolean exportAdds(@RequestBody LogiExportMulti data) {
 		System.out.println("post 들어감");
-		System.out.println(data); 
+		System.out.println(data);
 		int result = exportService.inserts(data);
 		AutoIncrese.setNum();
 		if (result > 0) {
-			for (LogiExportMultiDTO logiExportMultiDTO : data) {
+			for (LogiExportMultiDTO logiExportMultiDTO : data.getLogiExportList()) {
 				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", logiExportMultiDTO);				
 			}
 		}
