@@ -5,7 +5,7 @@
     <select id="selectAll"  resultType="LogiExportVo">
         SELECT *
         from Export
-        order by inst_reg_date;
+        order by inst_reg_date desc;
     </select>
     
     <select id="selectByInstNo" parameterType="String" resultType="LogiExportVo">
@@ -38,7 +38,7 @@
     	(height between #{min_height} and #{max_height}) and
     	(order_amount between #{min_order_amount} and #{max_order_amount}) and
     	(ex_amount between #{min_ex_amount} and #{max_ex_amount})
-        order by inst_reg_date;
+        order by inst_reg_date desc;
     </select>
     
     <insert id="insert" parameterType="LogiExportDTO">
