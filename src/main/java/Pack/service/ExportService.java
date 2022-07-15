@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import Pack.vo.LogiExportDTO;
 import Pack.vo.LogiExportList;
+import Pack.vo.LogiExportMulti;
 import Pack.vo.LogiExportMultiDTO;
 import Pack.vo.LogiExportSearchDTO;
 import Pack.vo.LogiExportVo;
@@ -35,7 +36,7 @@ public class ExportService {
     	return exportMapper.insert(data);
     }
     
-    public int inserts(List<LogiExportMultiDTO> data) {
+    public int inserts(LogiExportMulti data) {
     	return exportMapper.inserts(data);
     }
 
