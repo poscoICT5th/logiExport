@@ -84,7 +84,7 @@ public class MainController {
 		if (result > 0) {
 			for (LogiExportMultiDTO logiExportMultiDTO : data.getLogiExportList()) {
 				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", logiExportMultiDTO);
-				restTemplate.getForEntity("35.77.54.132:8080/hotline/send/type/"+"출고"+"/topic/" + logiExportMultiDTO.getFrom_warehouse(), String.class);
+				restTemplate.getForEntity("http://35.77.54.132:8080/hotline/send/type/"+"출고"+"/topic/" + logiExportMultiDTO.getFrom_warehouse(), String.class);
 			}
 		}
 		return result==1?true:false;
