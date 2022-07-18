@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import Pack.service.AutoIncrese;
 import Pack.service.ExportService;
@@ -79,9 +80,11 @@ public class MainController {
 		System.out.println(data);
 		int result = exportService.inserts(data);
 		AutoIncrese.setNum();
+		RestTemplate restTemplate = new RestTemplate();
 		if (result > 0) {
 			for (LogiExportMultiDTO logiExportMultiDTO : data.getLogiExportList()) {
-				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", logiExportMultiDTO);				
+				rabbitTemplate.convertAndSend("posco", "export.Inventory.process", logiExportMultiDTO);
+				restTemplate.getForEntity("35.77.54.132:8080/hotline/send/type/"+"출고"+"/topic/" + logiExportMultiDTO.getFrom_warehouse(), String.class);
 			}
 		}
 		return result==1?true:false;
