@@ -59,7 +59,7 @@ public class LogiExportMultiDTO {
 		this.from_warehouse = warehouse_code;
 		this.customer = customer;
 		this.order_date = order_date;
-		this.inst_reg_date = new SimpleDateFormat("YYYY-MM-dd").format(curTime);
+		this.inst_reg_date = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(curTime);
 		this.inst_deadline = inst_deadline;
 	}
 

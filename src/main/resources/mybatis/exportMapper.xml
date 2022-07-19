@@ -28,10 +28,10 @@
     	<if test='item_name != null and item_name neq "전체보기"'>item_name=#{item_name} and</if>
     	<!-- <if test="from_warehouse != ''">from_warehouse=#{from_warehouse} and</if> -->
 		<if test='unit != null and unit neq "전체보기"'>unit=#{unit} and</if>
-    	<if test='order_date != null and order_date neq "전체보기"'>order_date=#{order_date} and</if>
-    	<if test='inst_reg_date != null and inst_reg_date neq "전체보기"'>inst_reg_date=#{inst_reg_date} and</if>
-    	<if test='inst_deadline != null and inst_deadline neq "전체보기"'>inst_deadline=#{inst_deadline} and</if>
-    	<if test='done_date != null and done_date neq "전체보기"'>done_date=#{done_date} and</if>
+    	<if test='order_date != null and order_date neq "전체보기"'>order_date like CONCAT('%',#{order_date},'%') and</if>
+    	<if test='inst_reg_date != null and inst_reg_date neq "전체보기"'>inst_reg_date  like CONCAT('%',#{inst_reg_date},'%') and</if>
+    	<if test='inst_deadline != null and inst_deadline neq "전체보기"'>inst_deadline  like CONCAT('%',#{inst_deadline},'%') and</if>
+    	<if test='done_date != null and done_date neq "전체보기"'>done_date like CONCAT('%',#{done_date},'%') and</if>
     	(width between #{min_width} and #{max_width}) and
     	(weight between #{min_weight} and #{max_weight}) and
     	(thickness between #{min_thickness} and #{max_thickness}) and
